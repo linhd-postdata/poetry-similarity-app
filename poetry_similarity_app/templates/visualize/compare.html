@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block css %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+/>
+{% endblock %}
+{% block content %}
+<div class="container-xxl">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-song">
+                <h3 class="card-header">
+                    {% if song.track_name %}
+                        {{ song.artist_name }} - {{ song.track_name }}
+                    {% elif song._source.song_id %}
+                        {{ song._source.song_id }}
+                    {% else %}
+                        Text of the poem:
+                    {% endif %}
+                </h3>
+                <div class="card-body">
+                    <div class="lyrics">
+                        {% for stanza in song._source.text.split("\n\n") %}
+                        <p class="stanza card-text">
+                            {% for line in stanza.split("\n") %}
+                            {{ line }}
+                            <br>
+                            {% endfor %}
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if similar_poems %}
+        <div class="col-lg-4">
+            <div class="card card-results">
+                <h3 class="card-header">Similarity based on: {{ selection }} embeddings</h3>
+                <div class="card-body list-group">
+                    {% for hit in similar_poems %}
+                    <a class="list-group-item list-group-item-action flex-column align-items-center"
+                       data-toggle="collapse"
+                       href="#similar-{{ hit._source.song_id }}"
+                       role="button" aria-expanded="false"
+                       aria-controls="similar-{{ hit._source.song_id }}">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1 text-primary">{{
+                                hit._source.song_id }}</h5>
+                            <span class="badge badge-primary badge-pill">Similarity: {{ '{:.3f}'.format(hit._score) }}</span>
+                        </div>
+<!--                        <small> hit.artist_name }}</small>-->
+                    </a>
+                    <div class="collapse" id="similar-{{ hit._source.song_id }}">
+                        <div class="card card-body">
+                            {% for stanza in hit._source.text.split("\n\n")
+                            %}
+                            <p class="stanza card-text">
+                                {% for line in stanza.split("\n") %}
+                                {{ line }}
+                                <br>
+                                {% endfor %}
+                            </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div><!-- /.row -->
+</div>
+{% endblock %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+{% endblock %}
+
