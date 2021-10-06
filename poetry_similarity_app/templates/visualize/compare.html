@@ -9,7 +9,7 @@
 {% block content %}
 <div class="container-xxl">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="card card-song">
                 <h3 class="card-header">
                     {% if song.track_name %}
@@ -35,7 +35,7 @@
             </div>
         </div>
         {% if similar_poems %}
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="card card-results">
                 <h3 class="card-header">Similarity based on: {{ selection }} embeddings</h3>
                 <div class="card-body list-group">

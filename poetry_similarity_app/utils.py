@@ -56,6 +56,5 @@ def get_similar_es(poem, similarity_base):
         }
     }
     body = {"query": q, "size": 10}
-    current_app.logger.info(json.dumps(body))
     response = ES.search(index=ES_INDEX, body=body)
     return response

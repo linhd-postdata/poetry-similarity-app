@@ -20,6 +20,7 @@ class SearchForm(FreeTextForm):
 
 class VectorSelectionForm(FlaskForm):
     choices = [("alberti", "Alberti embeddings"),
-               ("spacy", "Spacy embeddings"),
-               ("bert", "Bert embeddings")]
+               # ("spacy", "Spacy embeddings"),
+               # ("bert", "Bert embeddings")
+               ]
     radio = RadioField("Similarity based on", choices=choices)
