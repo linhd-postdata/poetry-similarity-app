@@ -1,0 +1,24 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Welcome to POSTDATA's poetry similarity app</h1>
+    </div>
+</div><!-- /.jumbotron -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3><i class="fa fa-search"></i>Search for a poem in our catalogue</h3>
+      <p><a class="nav-link navbar-text" href="{{ url_for('search.search') }}">Search poem</a></p>
+    </div>
+    <div class="col-lg-6">
+      <h3><i class="fa fa-flask"></i>Write a poem to search similar ones in our catalogue</h3>
+<!--      <p><a class="nav-link navbar-text" href=" url_for('insert.introducir') ">New poem</a></p>-->
+   </div>
+  </div><!-- /.row -->
+</div>
+{% endblock %}
+

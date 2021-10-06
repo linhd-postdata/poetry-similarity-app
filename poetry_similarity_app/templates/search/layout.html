@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- barra de busqueda por titulo y/o autor -->
+<h1>Poem searching</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Search for a poem in our catalogue</h4>
+            <form class="form" id="searchForm" method="POST" action=""
+                  role="form">
+                {{ form.csrf_token }}
+                <div class="form-row">
+                    <div class="col">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <p><i class="fa fa-search"></i> Search by:
+                            {{ form.select(class_=" mr-sm-1 my-auto") }}
+                            </p>
+                        </div>
+                        <div class="input-group mb-2 mr-sm-2">
+                            {{ form.text_area.label() }}
+                            {{ form.text_area(rows="1", cols="50") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <button class="btn btn-primary m-auto"
+                            type="submit">
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
