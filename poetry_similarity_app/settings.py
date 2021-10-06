@@ -20,4 +20,4 @@ DEBUG_TB_INTERCEPT_REDIRECTS = False
 CACHE_TYPE = "simple"  # Can be "memcached", "redis", etc.
 ES_HOST = env.str("ES_HOST", default='http://localhost:9200')
 ES_INDEX = env.str("ES_INDEX", default='roberta-alberti_poetry_lyrics')
-
+URL_PREFIX = env.str("URL_PREFIX", default='/similarity')

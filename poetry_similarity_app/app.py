@@ -9,6 +9,7 @@ from flask import render_template
 from poetry_similarity_app import commands
 from poetry_similarity_app import views
 from poetry_similarity_app import extensions
+from poetry_similarity_app import settings
 
 
 def create_app(config_object="poetry_similarity_app.settings"):
@@ -36,9 +37,9 @@ def register_extensions(app):
 
 def register_blueprints(app):
     """Register Flask blueprints."""
-    app.register_blueprint(views.home.blueprint)
-    app.register_blueprint(views.search.blueprint)
-    app.register_blueprint(views.visualize.blueprint)
+    app.register_blueprint(views.home.blueprint, url_prefix=settings.URL_PREFIX)
+    app.register_blueprint(views.search.blueprint, url_prefix=settings.URL_PREFIX)
+    app.register_blueprint(views.visualize.blueprint, url_prefix=settings.URL_PREFIX)
     # app.register_blueprint(views.insert.blueprint)
     return None
 
