@@ -1,14 +1,13 @@
 version: "3.6"
 
 x-build-args: &build_args
-  INSTALL_PYTHON_VERSION: 3.8
-  INSTALL_NODE_VERSION: 15
+  INSTALL_PYTHON_VERSION: 3.9
+  INSTALL_NODE_VERSION: 16
 
 x-default-volumes: &default_volumes
   volumes:
     - ./:/app
     - node-modules:/app/node_modules
-    - ./dev.db:/tmp/dev.db
 
 services:
   flask-dev:
@@ -37,6 +36,8 @@ services:
       FLASK_DEBUG: 0
       LOG_LEVEL: info
       GUNICORN_WORKERS: 4
+      ES_HOST: host.docker.internal
+      ES_PORT: 9200
     <<: *default_volumes
 
   manage:

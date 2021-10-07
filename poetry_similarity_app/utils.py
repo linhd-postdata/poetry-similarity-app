@@ -8,8 +8,9 @@ from elasticsearch import Elasticsearch
 
 from .settings import ES_HOST
 from .settings import ES_INDEX
+from .settings import ES_PORT
 
-ES = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+ES = Elasticsearch([{'host': ES_HOST, 'port': ES_PORT}])
 
 
 def flash_errors(form, category="warning"):
@@ -32,7 +33,7 @@ def query_es(q):
         ('pretty', ''),
         ('q', q),
     )
-    response = requests.get(f"{ES_HOST}/{ES_INDEX}/_search", params=params)
+    response = requests.get(f"{ES_HOST}:{ES_PORT}/{ES_INDEX}/_search", params=params)
     if response.status_code == 200:
         response = response.json()
     else:

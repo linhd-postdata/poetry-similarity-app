@@ -1,5 +1,5 @@
 /*
- * Main Javascript file for lucky_look.
+ * Main Javascript file for poetry_similarity_app.
  *
  * This file bundles all of your javascript together using webpack.
  */

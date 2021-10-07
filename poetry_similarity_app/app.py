@@ -30,7 +30,7 @@ def create_app(config_object="poetry_similarity_app.settings"):
 def register_extensions(app):
     """Register Flask extensions."""
     extensions.cache.init_app(app)
-    extensions.debug_toolbar.init_app(app)
+    # extensions.debug_toolbar.init_app(app)
     extensions.flask_static_digest.init_app(app)
     return None
 
