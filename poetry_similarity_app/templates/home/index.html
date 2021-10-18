@@ -1,24 +1,18 @@
-
 {% extends "layout.html" %}
 {% block content %}
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Welcome to POSTDATA's poetry similarity app</h1>
+<div class="px-4 py-5 my-5 bg-light text-center">
+    <h1 class="display-5 fw-bold">POSTDATA's poetry similarity app</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">This application shows similar poems to a given
+            one.
+            You can select a poem from our catalog or write your own.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{{ url_for('search.search') }}"
+               class="btn btn-dark btn-lg px-4 gap-3">Search poem</a>
+            <button type="button" class="btn btn-dark btn-lg px-4">Write poem
+            </button>
+        </div>
     </div>
-</div><!-- /.jumbotron -->
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-6">
-      <h3><i class="fa fa-search"></i>Search for a poem in our catalogue</h3>
-      <p><a class="nav-link navbar-text" href="{{ url_for('search.search') }}">Search poem</a></p>
-    </div>
-    <div class="col-lg-6">
-      <h3><i class="fa fa-flask"></i>Write a poem to search similar ones in our catalogue</h3>
-<!--      <p><a class="nav-link navbar-text" href=" url_for('insert.introducir') ">New poem</a></p>-->
-   </div>
-  </div><!-- /.row -->
 </div>
 {% endblock %}
 
