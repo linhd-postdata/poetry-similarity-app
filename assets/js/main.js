@@ -1,5 +1,5 @@
 /*
- * Main Javascript file for lucky_look.
+ * Main Javascript file for poetry_similarity_app.
  *
  * This file bundles all of your javascript together using webpack.
  */
@@ -7,8 +7,8 @@
 // JavaScript modules
 require('@fortawesome/fontawesome-free');
 require('jquery');
-require('popper.js');
 require('bootstrap');
+require('@popperjs/core')
 
 require.context(
   '../img', // context folder
@@ -17,5 +17,5 @@ require.context(
 );
 
 // Your own code
-require('./plugins.js');
-require('./script.js');
+require('./plugins');
+require('./script');

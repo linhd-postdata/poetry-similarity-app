@@ -1,28 +1,23 @@
 {% extends "layout.html" %}
-{% block css %}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-      crossorigin="anonymous"
-/>
-{% endblock %}
 {% block content %}
-<div class="container-xxl">
+<div class="container-xl">
     <div class="row">
         <div class="col-lg-6">
-            <div class="card card-song">
-                <h3 class="card-header">
-                    {% if song.track_name %}
-                        {{ song.artist_name }} - {{ song.track_name }}
-                    {% elif song._source.song_id %}
-                        {{ song._source.song_id }}
-                    {% else %}
+            <div class="card card-song text-dark bg-light mb-3">
+                <div class="card-header">
+                    <h3>
+                        {% if poem._source.author %}
+                        {{ poem._source.poem_title }} - <small>{{ poem._source.author }}</small>
+                        {% elif poem._source.song_id %}
+                        {{ poem._source.song_id }}
+                        {% else %}
                         Text of the poem:
-                    {% endif %}
-                </h3>
+                        {% endif %}
+                    </h3>
+                </div>
                 <div class="card-body">
                     <div class="lyrics">
-                        {% for stanza in song._source.text.split("\n\n") %}
+                        {% for stanza in poem._source.text.split("\n\n") %}
                         <p class="stanza card-text">
                             {% for line in stanza.split("\n") %}
                             {{ line }}
@@ -37,20 +32,33 @@
         {% if similar_poems %}
         <div class="col-lg-6">
             <div class="card card-results">
-                <h3 class="card-header">Similarity based on: {{ selection }} embeddings</h3>
-                <div class="card-body list-group">
+                <div class="card-header">
+                <p>Similar poems based on: <code>{{ selection.model }}</code>
+                    embeddings, granularity: <code>{{ selection.granularity }}</code>,
+                    composition function: <code>{{ selection.similarity_fn }}</code> and
+                    composition of composition function: <code>{{ selection.composition_fn }}</code>
+                    {% if selection.beta_ICM %}
+                    with β value <code>{{ selection.beta_ICM }}</code>
+                    {% endif %}</p>
+                </div>
+                <div class="card-body">
                     {% for hit in similar_poems %}
-                    <a class="list-group-item list-group-item-action flex-column align-items-center"
-                       data-toggle="collapse"
+                    <a class="list-group-item flex-column align-items-center"
+                       data-bs-toggle="collapse"
                        href="#similar-{{ hit._source.song_id }}"
                        role="button" aria-expanded="false"
                        aria-controls="similar-{{ hit._source.song_id }}">
                         <div class="d-flex justify-content-between">
-                            <h5 class="mb-1 text-primary">{{
-                                hit._source.song_id }}</h5>
-                            <span class="badge badge-primary badge-pill">Similarity: {{ '{:.3f}'.format(hit._score) }}</span>
+                            <h5 class="mb-1">
+                                {{ hit._source.poem_title}} - <small>
+                            {{ hit._source.author }} </small>
+                            </h5>
+                            <div>
+                                <span class="badge bg-dark align-middle">
+                                Score: {{ '{:.3f}'.format(hit._score) }}
+                                </span>
+                            </div>
                         </div>
-<!--                        <small> hit.artist_name }}</small>-->
                     </a>
                     <div class="collapse" id="similar-{{ hit._source.song_id }}">
                         <div class="card card-body">
@@ -73,9 +81,3 @@
     </div><!-- /.row -->
 </div>
 {% endblock %}
-{% block js %}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
-{% endblock %}
-

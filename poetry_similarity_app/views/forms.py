@@ -12,15 +12,15 @@ class FreeTextForm(FlaskForm):
 
 
 class SearchForm(FreeTextForm):
-    choices = [('artist_name', 'Poet name'),
-               ('track_name', 'Title of the poem'),
+    choices = [('author', 'Poet name'),
+               ('poem_title', 'Title of the poem'),
                ('text', 'Excerpt of the poem')]
     select = SelectField('Search for poems:', choices=choices)
 
 
 class VectorSelectionForm(FlaskForm):
-    choices = [("alberti", "Alberti embeddings"),
-               # ("spacy", "Spacy embeddings"),
-               # ("bert", "Bert embeddings")
+    choices = [("roberta-alberti_poetry_lyrics", "Alberti embeddings"),
+               ("roberta-m-poetry-stanzas", "Roberta embeddings cos_sim_sum sum"),
+               ("roberta-m-poetry-stanzas-ICM", "Roberta embeddings")
                ]
     radio = RadioField("Similarity based on", choices=choices)

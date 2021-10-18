@@ -21,7 +21,7 @@ RUN npm install
 COPY webpack.config.js autoapp.py ./
 COPY poetry_similarity_app poetry_similarity_app
 COPY assets assets
-COPY .env.example .env
+COPY .env .env
 RUN npm run-script build
 
 # ================================= PRODUCTION =================================

@@ -17,7 +17,7 @@ def create_app(config_object="poetry_similarity_app.settings"):
 
     :param config_object: The configuration object to use.
     """
-    app = Flask(__name__.split(".")[0], static_folder="./static/")
+    app = Flask(__name__.split(".")[0])
     app.config.from_object(config_object)
     register_extensions(app)
     register_blueprints(app)
@@ -30,16 +30,16 @@ def create_app(config_object="poetry_similarity_app.settings"):
 def register_extensions(app):
     """Register Flask extensions."""
     extensions.cache.init_app(app)
-    extensions.debug_toolbar.init_app(app)
+    # extensions.debug_toolbar.init_app(app)
     extensions.flask_static_digest.init_app(app)
     return None
 
 
 def register_blueprints(app):
     """Register Flask blueprints."""
-    app.register_blueprint(views.home.blueprint, url_prefix=settings.URL_PREFIX)
-    app.register_blueprint(views.search.blueprint, url_prefix=settings.URL_PREFIX)
-    app.register_blueprint(views.visualize.blueprint, url_prefix=settings.URL_PREFIX)
+    app.register_blueprint(views.home.blueprint)
+    app.register_blueprint(views.search.blueprint)
+    app.register_blueprint(views.visualize.blueprint)
     # app.register_blueprint(views.insert.blueprint)
     return None
 

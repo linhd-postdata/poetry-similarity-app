@@ -1,13 +1,11 @@
 from flask import Blueprint
-from flask import current_app
 from flask import flash
 from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
 
-
-from poetry_similarity_app.utils import query_es
+from poetry_similarity_app.utils import query_es, add_poem_metadata
 from poetry_similarity_app.views.forms import SearchForm
 from poetry_similarity_app.views.forms import VectorSelectionForm
 
@@ -29,18 +27,17 @@ def search():
 def results():
     q = request.args['q']
     response = query_es(q)
-    # current_app.logger.debug(response)
+    for hit in response["hits"]["hits"]:
+        add_poem_metadata(hit)
     form = VectorSelectionForm(prefix="form")
     if request.method == 'POST':
         if 'results' in request.form:
-            song_id = request.form['results']
-            similarity_base = request.form['form-radio']
-            # vector_selection = "_".join(
-            #     sorted([key for (key, value) in form.data.items() if
-            #             value is True]))
-            # current_app.logger.info(f"Formulario 1: {vector_selection}")
-            return redirect(url_for('visualize.visualize', num=int(song_id),
-                                     similarity_base=similarity_base))
+            if 'form-radio' in request.form:
+                song_id = request.form['results']
+                similarity_base = request.form['form-radio']
+                return redirect(url_for('visualize.visualize', num=int(song_id),
+                                        similarity_base=similarity_base))
+            flash("No similarity based selected", "warning")
         flash("No song selected, please select a song to visualize", 'warning')
     if response["hits"]["total"]["value"] == 0:
         flash("The search didn't return any results", 'error')
