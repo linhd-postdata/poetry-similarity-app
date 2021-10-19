@@ -5,6 +5,7 @@ from wtforms import RadioField
 from wtforms import SelectField
 from wtforms import TextAreaField
 from wtforms.validators import InputRequired
+from wtforms.form import Form
 
 
 class FreeTextForm(FlaskForm):
@@ -18,9 +19,10 @@ class SearchForm(FreeTextForm):
     select = SelectField('Search for poems:', choices=choices)
 
 
-class VectorSelectionForm(FlaskForm):
+class VectorSelectionForm(Form):
     choices = [("roberta-alberti_poetry_lyrics", "Alberti embeddings"),
-               ("roberta-m-poetry-stanzas", "Roberta embeddings cos_sim_sum sum"),
-               ("roberta-m-poetry-stanzas-ICM", "Roberta embeddings")
+               ("roberta-m_poetry_lyrics", "Roberta embeddings cos_sim_sum sum"),
+               ("roberta-m_poetry_stanzas", "Roberta embeddings (ICM)")
                ]
-    radio = RadioField("Similarity based on", choices=choices)
+    radio = RadioField("Similarity based on", validators=[InputRequired()],
+                       choices=choices)

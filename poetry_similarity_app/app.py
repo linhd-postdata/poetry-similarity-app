@@ -40,7 +40,7 @@ def register_blueprints(app):
     app.register_blueprint(views.home.blueprint)
     app.register_blueprint(views.search.blueprint)
     app.register_blueprint(views.visualize.blueprint)
-    # app.register_blueprint(views.insert.blueprint)
+    app.register_blueprint(views.write.blueprint)
     return None
 
 
