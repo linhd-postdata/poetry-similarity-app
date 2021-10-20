@@ -26,3 +26,8 @@ environs==9.3.1
 # app
 requests~=2.25.1
 elasticsearch~=7.15.0
+torch==1.9.1+cpu
+torchvision==0.10.1+cpu
+torchaudio==0.9.1
+-f https://download.pytorch.org/whl/torch_stable.html
+transformers==4.11.3

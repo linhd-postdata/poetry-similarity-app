@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block header %}
+<h1>Wirte your own poem to search similar ones</h1>
+{% endblock %}
+{% block content %}
+<div class="px-4 bg-light">
+    <form class="py-4" id="freeTextForm" method="POST" action="" role="form">
+        {{ form.csrf_token }}
+        <div class="row g-3 align-items-center">
+            <div class="col-md-6">
+                <label for="text_area" class="col-form-label">
+                    <i class="fa fa-edit"></i> Write your poem:
+                </label>
+                <div class="input-group">
+                    {{ form.text_area(rows="12", cols="40", class_="form-control") }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Obtain similar poems based on:</h4>
+                {% for subfield in form1.radio %}
+                <div class="form-check">
+                    {{ subfield(class_="form-check-input")}}
+                    {{ subfield.label }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-dark btn-lg" type="submit">Show similar
+                poems
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

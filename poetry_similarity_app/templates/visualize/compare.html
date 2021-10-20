@@ -35,8 +35,8 @@
                 <div class="card-header">
                 <p>Similar poems based on: <code>{{ selection.model }}</code>
                     embeddings, granularity: <code>{{ selection.granularity }}</code>,
-                    composition function: <code>{{ selection.similarity_fn }}</code> and
-                    composition of composition function: <code>{{ selection.composition_fn }}</code>
+                    composition function: <code>{{ selection.composition_fn }}</code> and
+                    composition of composition function: <code>{{ selection.cofc_fn }}</code>
                     {% if selection.beta_ICM %}
                     with β value <code>{{ selection.beta_ICM }}</code>
                     {% endif %}</p>
@@ -55,7 +55,7 @@
                             </h5>
                             <div>
                                 <span class="badge bg-dark align-middle">
-                                Score: {{ '{:.3f}'.format(hit._score) }}
+                                Score: {{ '{:.3f}'.format(hit._score-1) }}
                                 </span>
                             </div>
                         </div>
