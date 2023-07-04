@@ -4,6 +4,8 @@
 Flask==1.1.2
 Werkzeug==1.0.1
 click>=7.0
+jinja2<3.1.0
+itsdangerous==2.0.1
 
 # Forms
 Flask-WTF==0.14.3
